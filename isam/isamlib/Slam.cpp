@@ -85,26 +85,6 @@ void Slam::save(const string fname) const {
   ofstream out(fname.c_str(), ios::out | ios::binary);
   require(out, "Slam.save: Cannot open output file.");
   write(out);
-  
-  list<list<Node*> > node_lists ;
-  list<Node*> nodes=get_nodes();
-  for(list<Node*>::iterator it=nodes.begin();it!=nodes.end();it++){
-	list<Node*> node_list;
-  	node_list.push_back(*it);
-	node_lists.push_back(node_list);
-  }
-  
-  list<MatrixXd> covs = _covariances.marginal(node_lists);
-  list<MatrixXd>::iterator cov_it = covs.begin();
-  for(list<Node*>::iterator it=nodes.begin(); it!=nodes.end();it++,cov_it++){
-    out<<"COV "<<(*it)->unique_id();
-    for(int i=0;i<cov_it->cols();i++){
-      for(int j=0;j<cov_it->rows();j++){
-    	out<<" "<<(*cov_it)(i,j);
-      }
-    }
-    out<<endl;
-  }	
   out.close();
 }
 

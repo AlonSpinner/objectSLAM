@@ -59,5 +59,5 @@ include_directories("${PROJECT_SOURCE_DIR}/include")
 
 add_subdirectory(isamlib)
 add_subdirectory(isam)
-# add_subdirectory(examples)
+add_subdirectory(examples)
 add_subdirectory(misc)
